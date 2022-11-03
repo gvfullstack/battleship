@@ -9,7 +9,7 @@
           return Math.floor(Math.random() * max);
         }
     var readlineSync = require('readline-sync');
-    var userName = readlineSync.keyInPause('Press any key to start the game.');
+    readlineSync.keyInPause('Press any key to start the game.');
     let s1P = getRandomInt(allPointsLength-1);
     function secondRand (){
         let rand = getRandomInt(allPointsLength-1) 

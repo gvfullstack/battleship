@@ -41,6 +41,43 @@ const allPoints = gridValArr.map(point => point.name)
 const allPointsLength = allPoints.length
 ////////////////////////////////////////////////////
 
+/////////////////PRINT TABLE/////////////////////////////
+function printTable (gridValArr, rows, gridSize){
+    let heading = `BATTLEFIELD`
+    for(let i = 0; i < gridSize; i ++){
+        if(i === 4 || i === 6 || i === 8){
+        heading = `   ${heading}`;
+        }
+        else{heading = ` ${heading}`;}       
+    }
+    console.log(heading)
+    
+    let colName = "   "
+    let colDashes =  `   `
+    for(let i = 0; i < gridSize; i ++){
+        colName += ` ${i+1}  `;
+        colDashes +=  `----`;
+    }
+    console.log(colName)
+    console.log(colDashes)
+
+    for(let i = 0; i < gridSize; i ++){
+        let rowOutput = `${rows[i]} |`;
+        let dashes = `   `
+            for(let item of gridValArr){
+                if(item.name.includes(rows[i])){
+                    rowOutput +=` ${item.value} |`;
+                    dashes += `----`
+                }
+            }
+        console.log(rowOutput)
+        console.log(dashes)
+    } return "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+}
+
+console.log(printTable (gridValArr, rows, gridSize))
+////////////////////////////////////////////////////
+
 /////////////////CREATE SHIPS/////////////////////////////
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
@@ -187,12 +224,14 @@ readlineSync.setDefaultOptions({limit: allPoints});
       if(shipsLocations.includes(allPoints.indexOf(playerInput))){
           gridValArr[allPoints.indexOf(playerInput)].value = "X"
           handleUserHit(allPoints.indexOf(playerInput))
+          console.log(printTable (gridValArr, rows, gridSize))
           } 
       else{
         gridValArr[allPoints.indexOf(playerInput)].value = "O"
         console.log(`
 You have missed!
         `)
+        console.log(printTable (gridValArr, rows, gridSize))
     }
     if(shipsSunk === shipsInGame){
         if (readlineSync.keyInYNStrict(`
